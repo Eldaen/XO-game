@@ -22,11 +22,15 @@ public final class Referee {
         generateWinRightDiagonal(result: &winningCombinations)
         return winningCombinations
     }()
+	
+	/// Номер хода
+	private var turn: Int = 1
     
     // MARK: - Init
     
     public init(gameboard: Gameboard) {
         self.gameboard = gameboard
+		self.turn = 1
     }
     
     // MARK: - Public
@@ -39,6 +43,16 @@ public final class Referee {
         }
         return nil
     }
+	
+	/// Проверяет, не закончились ли ходы в игре
+	func endByTurns() -> Bool {
+		return turn == 9 ? true : false
+	}
+	
+	/// Увеличивает счётчик ходов на 1
+	func nextTurn() {
+		turn += 1
+	}
     
     // MARK: - Private
     

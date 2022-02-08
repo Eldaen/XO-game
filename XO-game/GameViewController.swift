@@ -26,9 +26,6 @@ class GameViewController: UIViewController {
 		}
 	}
 	
-	/// Номер хода
-	private var turn: Int = 1
-	
 	/// Класс - Судья, определяет победителей или конец игры
 	private lazy var referee = Referee(gameboard: self.gameboard)
     
@@ -71,8 +68,8 @@ class GameViewController: UIViewController {
 			return
 		}
 		
-		// Проверяем, не заполнены ли все поле
-		if turn == 9 {
+		// Проверяем, не заполнены ли все поля
+		if referee.endByTurns() {
 			self.currentState = GameEndedState(winner: nil, gameViewController: self)
 			return
 		}
@@ -84,7 +81,7 @@ class GameViewController: UIViewController {
 				gameboard: gameboard,
 				gameboardView: gameboardView
 			)
-			self.turn += 1
+			referee.nextTurn()
 		}
 	}
 }
