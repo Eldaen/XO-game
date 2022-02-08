@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D04F0AAD27B26A5C002962B1 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04F0AAC27B26A5C002962B1 /* GameState.swift */; };
+		D04F0AAF27B26B7B002962B1 /* PlayerInputState.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04F0AAE27B26B7B002962B1 /* PlayerInputState.swift.swift */; };
 		F874E4712224621100364CAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874E4702224621100364CAE /* AppDelegate.swift */; };
 		F874E4732224621100364CAE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874E4722224621100364CAE /* GameViewController.swift */; };
 		F874E4762224621100364CAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F874E4742224621100364CAE /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		D04F0AAC27B26A5C002962B1 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		D04F0AAE27B26B7B002962B1 /* PlayerInputState.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInputState.swift.swift; sourceTree = "<group>"; };
 		F874E46D2224621100364CAE /* XO-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XO-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F874E4702224621100364CAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F874E4722224621100364CAE /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				F874E4792224621300364CAE /* LaunchScreen.storyboard */,
 				F874E47C2224621300364CAE /* Info.plist */,
 				D04F0AAC27B26A5C002962B1 /* GameState.swift */,
+				D04F0AAE27B26B7B002962B1 /* PlayerInputState.swift.swift */,
 			);
 			path = "XO-game";
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				F874E4F52225E2CD00364CAE /* Gameboard.swift in Sources */,
 				F874E4712224621100364CAE /* AppDelegate.swift in Sources */,
 				F874E4E22225CABF00364CAE /* OView.swift in Sources */,
+				D04F0AAF27B26B7B002962B1 /* PlayerInputState.swift.swift in Sources */,
 				F874E4F32225E0B100364CAE /* GameboardSize.swift in Sources */,
 				F874E4E42225CB0700364CAE /* XView.swift in Sources */,
 				D04F0AAD27B26A5C002962B1 /* GameState.swift in Sources */,
