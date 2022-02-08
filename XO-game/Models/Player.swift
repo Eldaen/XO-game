@@ -18,4 +18,12 @@ public enum Player: CaseIterable {
         case .second: return .first
         }
     }
+	
+	/// Возвращает прототип метки, в зависимости от игрока, каждому - разная
+	var markViewPrototype: MarkView {
+		switch self {
+		case .first: return XView()
+		case .second: return OView()
+		}
+	}
 }
