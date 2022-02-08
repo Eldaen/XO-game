@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
 		
         gameboardView.onSelectPosition = { [weak self] position in
             guard let self = self else { return }
-            self.gameboardView.placeMarkView(XView(), at: position)
+			self.currentState.addMark(at: position)
 			
 			if self.currentState.isCompleted {
 				self.goToNextState()
