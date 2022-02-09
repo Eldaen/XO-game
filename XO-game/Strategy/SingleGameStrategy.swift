@@ -11,12 +11,20 @@ import Foundation
 /// Класс для одиночной игры с компьютером
 final class SingleGameStrategy: StrategyProtocol {
 	
-	weak var computer: ComputerMindProtocol?
+	private lazy var computer = ComputerMind(gameboard: controller?.gameboard)
 	
 	/// Текущее состояние игры
 	var currentState: GameState? {
 		didSet {
 			self.currentState?.begin()
+			if let currentState = currentState as? ComputerTurnState,
+			   let position = getComputerTurn() {
+				currentState.addMark(at: position)
+				
+				if currentState.isCompleted {
+					goToNextState()
+				}
+			}
 		}
 	}
 
@@ -43,7 +51,7 @@ final class SingleGameStrategy: StrategyProtocol {
 		}
 		
 		if let _ = currentState as? PlayerInputState,
-			let controller = controller {
+		   let controller = controller {
 			let player = Player.computer
 			
 			self.currentState = ComputerTurnState(
@@ -52,8 +60,18 @@ final class SingleGameStrategy: StrategyProtocol {
 				gameboard: controller.gameboard,
 				gameboardView: controller.getGameboardView()
 			)
-			self.currentState?.begin()
-			controller.computerTurn()
+			referee.nextTurn()
+		} else if currentState is ComputerTurnState,
+				  let controller = controller {
+			let player = Player.first
+			
+			self.currentState = PlayerInputState(
+				player: player,
+				markViewPrototype: player.markViewPrototype,
+				gameViewController: controller,
+				gameboard: controller.gameboard,
+				gameboardView: controller.getGameboardView()
+			)
 			referee.nextTurn()
 		}
 	}
@@ -63,7 +81,8 @@ final class SingleGameStrategy: StrategyProtocol {
 	}
 	
 	/// Возвращает позицию, в которую пошёл компьютер
-	func getComputerTurn() -> GameboardPosition {
-		return GameboardPosition(column: 1, row: 1)
+	func getComputerTurn() -> GameboardPosition? {
+		let position = computer.makeTurn()
+		return position
 	}
 }

@@ -28,9 +28,6 @@ protocol GameViewControllerDelegate: AnyObject {
 	
 	/// Возвращает ссылку на текущий GameboardView
 	func getGameboardView() -> GameboardView
-	
-	/// ход компьютера
-	func computerTurn()
 }
 
 /// Основной контроллер игры
@@ -114,18 +111,6 @@ extension GameViewController: GameViewControllerDelegate {
 	func getGameboardView() -> GameboardView {
 		self.gameboardView
 	}
-	
-	func computerTurn() {
-		if let strategy = strategy as? SingleGameStrategy,
-		   let currentState = strategy.currentState as? ComputerTurnState {
-			
-			let position = strategy.getComputerTurn()
-			currentState.addMark(at: position)
-			
-			if currentState.isCompleted {
-				strategy.goToNextState()
-			}
-		}
-	}
+
 }
 

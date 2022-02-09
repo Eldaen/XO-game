@@ -37,6 +37,21 @@ public final class Gameboard {
         let (column, row) = (position.column, position.row)
         return positions[column][row] == player
     }
+	
+	/// Возвращает список пустых позиций
+	public func getSparePositions() -> [GameboardPosition] {
+		var sparePositions: [Int: Int] = [:]
+		
+		for (rowIndex, row) in positions.enumerated() {
+			for (columnIndex, column) in row.enumerated() {
+				if column == nil {
+					sparePositions.updateValue(rowIndex, forKey: columnIndex)
+				}
+			}
+		}
+		
+		return sparePositions.map { GameboardPosition(column: $1, row: $0) }
+	}
     
     // MARK: - Private
     

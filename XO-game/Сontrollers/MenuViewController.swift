@@ -18,7 +18,8 @@ final class MenuViewController: UIViewController {
 			}
 		} else if segue.identifier == "singleGame" {
 			if let controller = segue.destination as? GameViewController {
-				controller.strategy = SingleGameStrategy()
+				let strategy = SingleGameStrategy()
+				controller.strategy = strategy
 			}
 		}
 	}
