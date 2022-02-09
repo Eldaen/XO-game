@@ -11,6 +11,10 @@
 		D04F0AAF27B26B7B002962B1 /* PlayerInputState.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04F0AAE27B26B7B002962B1 /* PlayerInputState.swift.swift */; };
 		D04F0AB127B271AD002962B1 /* GameEndedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04F0AB027B271AD002962B1 /* GameEndedState.swift */; };
 		D04F0AB527B2ACF7002962B1 /* CopyingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04F0AB427B2ACF7002962B1 /* CopyingProtocol.swift */; };
+		D072776F27B3A4E70030855C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D072776E27B3A4E70030855C /* MenuViewController.swift */; };
+		D072777227B3A8240030855C /* ClassicGameStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D072777127B3A8240030855C /* ClassicGameStrategy.swift */; };
+		D072777427B3A8310030855C /* SingleGameStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D072777327B3A8310030855C /* SingleGameStrategy.swift */; };
+		D072777627B3A83F0030855C /* StrategyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D072777527B3A83F0030855C /* StrategyProtocol.swift */; };
 		F874E4712224621100364CAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874E4702224621100364CAE /* AppDelegate.swift */; };
 		F874E4732224621100364CAE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874E4722224621100364CAE /* GameViewController.swift */; };
 		F874E4762224621100364CAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F874E4742224621100364CAE /* Main.storyboard */; };
@@ -32,6 +36,10 @@
 		D04F0AAE27B26B7B002962B1 /* PlayerInputState.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInputState.swift.swift; sourceTree = "<group>"; };
 		D04F0AB027B271AD002962B1 /* GameEndedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndedState.swift; sourceTree = "<group>"; };
 		D04F0AB427B2ACF7002962B1 /* CopyingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyingProtocol.swift; sourceTree = "<group>"; };
+		D072776E27B3A4E70030855C /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		D072777127B3A8240030855C /* ClassicGameStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicGameStrategy.swift; sourceTree = "<group>"; };
+		D072777327B3A8310030855C /* SingleGameStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGameStrategy.swift; sourceTree = "<group>"; };
+		D072777527B3A83F0030855C /* StrategyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyProtocol.swift; sourceTree = "<group>"; };
 		F874E46D2224621100364CAE /* XO-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XO-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F874E4702224621100364CAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F874E4722224621100364CAE /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +79,25 @@
 			path = GameStates;
 			sourceTree = "<group>";
 		};
+		D072776D27B3A4C80030855C /* Сontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				F874E4722224621100364CAE /* GameViewController.swift */,
+				D072776E27B3A4E70030855C /* MenuViewController.swift */,
+			);
+			path = "Сontrollers";
+			sourceTree = "<group>";
+		};
+		D072777027B3A80A0030855C /* Strategy */ = {
+			isa = PBXGroup;
+			children = (
+				D072777127B3A8240030855C /* ClassicGameStrategy.swift */,
+				D072777327B3A8310030855C /* SingleGameStrategy.swift */,
+				D072777527B3A83F0030855C /* StrategyProtocol.swift */,
+			);
+			path = Strategy;
+			sourceTree = "<group>";
+		};
 		F874E4642224621100364CAE = {
 			isa = PBXGroup;
 			children = (
@@ -90,11 +117,12 @@
 		F874E46F2224621100364CAE /* XO-game */ = {
 			isa = PBXGroup;
 			children = (
+				D072777027B3A80A0030855C /* Strategy */,
+				D072776D27B3A4C80030855C /* Сontrollers */,
 				D04F0AB227B271B4002962B1 /* GameStates */,
 				F874E4E52225CB3100364CAE /* Views */,
 				F874E4E62225CB3F00364CAE /* Models */,
 				F874E4702224621100364CAE /* AppDelegate.swift */,
-				F874E4722224621100364CAE /* GameViewController.swift */,
 				F874E4F02225DFF700364CAE /* Referee.swift */,
 				F874E4772224621300364CAE /* Assets.xcassets */,
 				F874E4742224621100364CAE /* Main.storyboard */,
@@ -206,7 +234,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D072777427B3A8310030855C /* SingleGameStrategy.swift in Sources */,
 				D04F0AB127B271AD002962B1 /* GameEndedState.swift in Sources */,
+				D072777227B3A8240030855C /* ClassicGameStrategy.swift in Sources */,
 				F874E4732224621100364CAE /* GameViewController.swift in Sources */,
 				F874E4DD2225C25D00364CAE /* GameboardPosition.swift in Sources */,
 				F874E4DF2225C76000364CAE /* MarkView.swift in Sources */,
@@ -214,6 +244,8 @@
 				F874E4F12225DFF700364CAE /* Referee.swift in Sources */,
 				F874E4F52225E2CD00364CAE /* Gameboard.swift in Sources */,
 				F874E4712224621100364CAE /* AppDelegate.swift in Sources */,
+				D072777627B3A83F0030855C /* StrategyProtocol.swift in Sources */,
+				D072776F27B3A4E70030855C /* MenuViewController.swift in Sources */,
 				F874E4E22225CABF00364CAE /* OView.swift in Sources */,
 				D04F0AAF27B26B7B002962B1 /* PlayerInputState.swift.swift in Sources */,
 				F874E4F32225E0B100364CAE /* GameboardSize.swift in Sources */,
@@ -367,13 +399,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6G4AKDTMLW;
+				DEVELOPMENT_TEAM = LSA8V5M5Q4;
 				INFOPLIST_FILE = "XO-game/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "plasmon.XO-game";
+				PRODUCT_BUNDLE_IDENTIFIER = "Denis-Sizov.XO-game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -385,13 +417,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6G4AKDTMLW;
+				DEVELOPMENT_TEAM = LSA8V5M5Q4;
 				INFOPLIST_FILE = "XO-game/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "plasmon.XO-game";
+				PRODUCT_BUNDLE_IDENTIFIER = "Denis-Sizov.XO-game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
