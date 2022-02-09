@@ -8,7 +8,29 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+/// Протокол делегата контроллера
+protocol GameViewControllerDelegate: AnyObject {
+	
+	/// Поле для игры, на нём размещаются метки
+	var gameboard: Gameboard { get }
+	
+	/// Устанавливает текст в лэйбле победителя
+	func setWinnerText(with string: String)
+	
+	/// Показать/Спрятать лэйбл первого игрока
+	func hideFirstPlayerLabel(_ bool: Bool)
+	
+	/// Показать/Спрятать лэйбл второго игрока
+	func hideSecondPlayerLabel(_ bool: Bool)
+	
+	/// Показать/Спрятать лэйбл победителя
+	func hideWinnderLabel(_ bool: Bool)
+	
+	/// Возвращает ссылку на текущий GameboardView
+	func getGameboardView() -> GameboardView
+}
+
+final class GameViewController: UIViewController {
 
     @IBOutlet var gameboardView: GameboardView!
     @IBOutlet var firstPlayerTurnLabel: UILabel!
@@ -16,35 +38,35 @@ class GameViewController: UIViewController {
     @IBOutlet var winnerLabel: UILabel!
     @IBOutlet var restartButton: UIButton!
 	
+	/// Cтратегия режима игры
+	var strategy: StrategyProtocol?
+	
 	/// Игровое поле, на котором можно размещать метки (крестики / нолики)
-	private let gameboard = Gameboard()
-	
-	/// Текущее состояние игры
-	private var currentState: GameState! {
-		didSet {
-			self.currentState.begin()
-		}
-	}
-	
-	/// Класс - Судья, определяет победителей или конец игры
-	private lazy var referee = Referee(gameboard: self.gameboard)
+	internal var gameboard = Gameboard()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.goToFirstState()
+		strategy?.controller = self
 		
         gameboardView.onSelectPosition = { [weak self] position in
-            guard let self = self else { return }
-			self.currentState.addMark(at: position)
+            guard let self = self,
+			let strategy = self.strategy,
+			let currentState = strategy.currentState else { return }
+
+			currentState.addMark(at: position)
 			
-			if self.currentState.isCompleted {
-				self.goToNextState()
+			if currentState.isCompleted {
+				strategy.goToNextState()
 			}
         }
     }
     
     @IBAction func restartButtonTapped(_ sender: UIButton) {
-        
+		gameboardView.clear()
+		gameboard.clear()
+		viewDidLoad()
+		strategy?.restart()
     }
 	
 	// MARK: - Private
@@ -53,7 +75,7 @@ class GameViewController: UIViewController {
 	private func goToFirstState() {
 		let player = Player.first
 		
-		self.currentState = PlayerInputState(
+		strategy?.currentState = PlayerInputState(
 			player: player,
 			markViewPrototype: player.markViewPrototype,
 			gameViewController: self,
@@ -62,33 +84,29 @@ class GameViewController: UIViewController {
 		)
 	}
 	
-	/// Переходит в следующее состояние со следующим игроком, если сейчас стостояние PlayerInputState
-	private func goToNextState() {
-		
-		// Проверяем, не закончилась ли ещё игра
-		if let winner = self.referee.determineWinner() {
-			self.currentState = GameEndedState(winner: winner, gameViewController: self)
-			return
-		}
-		
-		// Проверяем, не заполнены ли все поля
-		if referee.endByTurns() {
-			self.currentState = GameEndedState(winner: nil, gameViewController: self)
-			return
-		}
-		
-		if let playerInputState = currentState as? PlayerInputState {
-			let player = playerInputState.player.next
-			
-			self.currentState = PlayerInputState(
-				player: player,
-				markViewPrototype: player.markViewPrototype,
-				gameViewController: self,
-				gameboard: gameboard,
-				gameboardView: gameboardView
-			)
-			referee.nextTurn()
-		}
+}
+
+// MARK: - GameViewControllerDelegate
+
+extension GameViewController: GameViewControllerDelegate {
+	func setWinnerText(with string: String) {
+		winnerLabel.text = string
+	}
+	
+	func hideFirstPlayerLabel(_ bool: Bool) {
+		firstPlayerTurnLabel.isHidden = bool
+	}
+	
+	func hideSecondPlayerLabel(_ bool: Bool) {
+		secondPlayerTurnLabel.isHidden = bool
+	}
+	
+	func hideWinnderLabel(_ bool: Bool) {
+		winnerLabel.isHidden = bool
+	}
+	
+	func getGameboardView() -> GameboardView {
+		self.gameboardView
 	}
 }
 

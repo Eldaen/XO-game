@@ -14,22 +14,22 @@ public class GameEndedState: GameState {
 	public let isCompleted = false
 	
 	public let winner: Player?
-	private(set) weak var gameViewController: GameViewController?
+	private(set) weak var gameViewController: GameViewControllerDelegate?
 	
-	init(winner: Player?, gameViewController: GameViewController) {
+	init(winner: Player?, gameViewController: GameViewControllerDelegate) {
 		self.winner = winner
 		self.gameViewController = gameViewController
 	}
 	
 	public func begin() {
-		self.gameViewController?.winnerLabel.isHidden = false
+		self.gameViewController?.hideWinnderLabel(false)
 		if let winner = winner {
-			self.gameViewController?.winnerLabel.text = self.winnerName(from: winner) + " win"
+			self.gameViewController?.setWinnerText(with: self.winnerName(from: winner) + " win")
 		} else {
-			self.gameViewController?.winnerLabel.text = "No winner"
+			self.gameViewController?.setWinnerText(with: "No winner")
 		}
-		self.gameViewController?.firstPlayerTurnLabel.isHidden = true
-		self.gameViewController?.secondPlayerTurnLabel.isHidden = true
+		self.gameViewController?.hideFirstPlayerLabel(true)
+		self.gameViewController?.hideSecondPlayerLabel(true)
 	}
 	
 	public func addMark(at position: GameboardPosition) { }

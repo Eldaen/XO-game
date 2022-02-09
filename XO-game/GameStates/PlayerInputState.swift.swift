@@ -14,7 +14,7 @@ public class PlayerInputState: GameState {
 	public private(set) var isCompleted = false
 	
 	public let player: Player
-	private(set) weak var gameViewController: GameViewController?
+	private(set) weak var gameViewController: GameViewControllerDelegate?
 	private(set) weak var gameboard: Gameboard?
 	private(set) weak var gameboardView: GameboardView?
 	
@@ -23,7 +23,7 @@ public class PlayerInputState: GameState {
 	
 	init(player: Player,
 		 markViewPrototype: MarkView,
-		 gameViewController: GameViewController,
+		 gameViewController: GameViewControllerDelegate,
 		 gameboard: Gameboard,
 		 gameboardView: GameboardView) {
 		self.player = player
@@ -36,13 +36,13 @@ public class PlayerInputState: GameState {
 	public func begin() {
 		switch self.player {
 		case .first:
-			self.gameViewController?.firstPlayerTurnLabel.isHidden = false
-			self.gameViewController?.secondPlayerTurnLabel.isHidden = true
+			self.gameViewController?.hideFirstPlayerLabel(false)
+			self.gameViewController?.hideSecondPlayerLabel(true)
 		case .second:
-			self.gameViewController?.firstPlayerTurnLabel.isHidden = true
-			self.gameViewController?.secondPlayerTurnLabel.isHidden = false
+			self.gameViewController?.hideFirstPlayerLabel(true)
+			self.gameViewController?.hideSecondPlayerLabel(false)
 		}
-		self.gameViewController?.winnerLabel.isHidden = true
+		self.gameViewController?.hideWinnderLabel(true)
 	}
 	
 	public func addMark(at position: GameboardPosition) {

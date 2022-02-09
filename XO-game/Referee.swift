@@ -28,7 +28,8 @@ public final class Referee {
     
     // MARK: - Init
     
-    public init(gameboard: Gameboard) {
+    public init(gameboard: Gameboard?) {
+		guard let gameboard = gameboard else { fatalError("Gameboard is nil") }
         self.gameboard = gameboard
 		self.turn = 1
     }
@@ -52,6 +53,11 @@ public final class Referee {
 	/// Увеличивает счётчик ходов на 1
 	func nextTurn() {
 		turn += 1
+	}
+	
+	/// Перезапускает счётчик ходов
+	func clearTurns() {
+		turn = 1
 	}
     
     // MARK: - Private

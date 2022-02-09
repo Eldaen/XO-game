@@ -9,5 +9,11 @@
 import UIKit
 
 final class MenuViewController: UIViewController {
-	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "classicGame" {
+			if let controller = segue.destination as? GameViewController {
+				controller.strategy = ClassicGameStrategy()
+			}
+		}
+	}
 }
