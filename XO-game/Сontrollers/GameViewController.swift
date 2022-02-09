@@ -28,8 +28,12 @@ protocol GameViewControllerDelegate: AnyObject {
 	
 	/// Возвращает ссылку на текущий GameboardView
 	func getGameboardView() -> GameboardView
+	
+	/// ход компьютера
+	func computerTurn()
 }
 
+/// Основной контроллер игры
 final class GameViewController: UIViewController {
 
     @IBOutlet var gameboardView: GameboardView!
@@ -44,23 +48,25 @@ final class GameViewController: UIViewController {
 	/// Игровое поле, на котором можно размещать метки (крестики / нолики)
 	internal var gameboard = Gameboard()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		self.goToFirstState()
 		strategy?.controller = self
 		
-        gameboardView.onSelectPosition = { [weak self] position in
-            guard let self = self,
-			let strategy = self.strategy,
-			let currentState = strategy.currentState else { return }
-
+		
+		gameboardView.onSelectPosition = { [weak self] position in
+			guard let self = self,
+				  let strategy = self.strategy,
+				  let currentState = strategy.currentState else { return }
+			
 			currentState.addMark(at: position)
 			
 			if currentState.isCompleted {
 				strategy.goToNextState()
 			}
-        }
-    }
+		}
+		
+	}
     
     @IBAction func restartButtonTapped(_ sender: UIButton) {
 		gameboardView.clear()
@@ -107,6 +113,19 @@ extension GameViewController: GameViewControllerDelegate {
 	
 	func getGameboardView() -> GameboardView {
 		self.gameboardView
+	}
+	
+	func computerTurn() {
+		if let strategy = strategy as? SingleGameStrategy,
+		   let currentState = strategy.currentState as? ComputerTurnState {
+			
+			let position = strategy.getComputerTurn()
+			currentState.addMark(at: position)
+			
+			if currentState.isCompleted {
+				strategy.goToNextState()
+			}
+		}
 	}
 }
 
