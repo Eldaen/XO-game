@@ -19,6 +19,10 @@ public final class Gameboard {
     public func setPlayer(_ player: Player, at position: GameboardPosition) {
         positions[position.column][position.row] = player
     }
+	
+	public func removePlayer(at position: GameboardPosition) {
+		positions[position.column][position.row] = nil
+	}
     
     public func clear() {
         self.positions = initialPositions()

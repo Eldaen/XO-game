@@ -78,13 +78,24 @@ final class GameViewController: UIViewController {
 	private func goToFirstState() {
 		let player = Player.first
 		
-		strategy?.currentState = PlayerInputState(
-			player: player,
-			markViewPrototype: player.markViewPrototype,
-			gameViewController: self,
-			gameboard: gameboard,
-			gameboardView: gameboardView
-		)
+		if let strategy = strategy as? FiveTurnsGameStrategy {
+			strategy.currentState = FiveTurnsState(
+				player: player,
+				invoker: strategy.invoker,
+				markViewPrototype: player.markViewPrototype,
+				gameViewController: self,
+				gameboard: gameboard,
+				gameboardView: gameboardView
+			)
+		} else {
+			strategy?.currentState = PlayerInputState(
+				player: player,
+				markViewPrototype: player.markViewPrototype,
+				gameViewController: self,
+				gameboard: gameboard,
+				gameboardView: gameboardView
+			)
+		}
 	}
 	
 }

@@ -21,6 +21,12 @@ final class MenuViewController: UIViewController {
 				let strategy = SingleGameStrategy()
 				controller.strategy = strategy
 			}
+		} else if segue.identifier == "fiveStepsMode" {
+			if let controller = segue.destination as? GameViewController {
+				let strategy = FiveTurnsGameStrategy()
+				strategy.controller = controller
+				controller.strategy = strategy
+			}
 		}
 	}
 }

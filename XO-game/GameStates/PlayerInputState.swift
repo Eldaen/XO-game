@@ -1,5 +1,5 @@
 //
-//  PlayerInputState.swift.swift
+//  PlayerInputState.swift
 //  XO-game
 //
 //  Created by Денис Сизов on 08.02.2022.
@@ -11,7 +11,7 @@ import Foundation
 /// Состояние хода игрока
 public class PlayerInputState: GameState {
 	
-	public private(set) var isCompleted = false
+	public var isCompleted = false
 	
 	public let player: Player
 	private(set) weak var gameViewController: GameViewControllerDelegate?

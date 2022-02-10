@@ -46,11 +46,12 @@ public class GameboardView: UIView {
         return markViewForPosition[position] == nil
     }
     
-    public func placeMarkView(_ markView: MarkView, at position: GameboardPosition) {
+	public func placeMarkView(_ markView: MarkView, at position: GameboardPosition) {
         guard self.canPlaceMarkView(at: position) else { return }
         updateFrame(for: markView, at: position)
         markViewForPosition[position] = markView
         addSubview(markView)
+		markView.animateIn { }
     }
     
     public func removeMarkView(at position: GameboardPosition) {
@@ -58,6 +59,7 @@ public class GameboardView: UIView {
             return
         }
         markViewForPosition[position] = nil
+		markView.animateOut { }
         markView.removeFromSuperview()
     }
     

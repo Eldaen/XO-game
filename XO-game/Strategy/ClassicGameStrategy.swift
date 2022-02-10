@@ -9,7 +9,7 @@
 import Foundation
 
 /// Стратегия классической игры с 2 игроками
-final class ClassicGameStrategy: StrategyProtocol {
+class ClassicGameStrategy: StrategyProtocol {
 	
 	/// Текущее состояние игры
 	var currentState: GameState? {
@@ -21,7 +21,7 @@ final class ClassicGameStrategy: StrategyProtocol {
 	weak var controller: GameViewControllerDelegate?
 	
 	/// Класс - Судья, определяет победителей или конец игры
-	private lazy var referee = Referee(gameboard: controller?.gameboard)
+	internal lazy var referee = Referee(gameboard: controller?.gameboard)
 	
 	/// Переходит в следующее состояние со следующим игроком, если сейчас стостояние PlayerInputState
 	func goToNextState() {

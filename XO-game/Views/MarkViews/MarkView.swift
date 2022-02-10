@@ -104,6 +104,7 @@ public class MarkView: UIView, Copying {
         animation.toValue = 1.0
         shapeLayer.add(animation, forKey: nil)
         CATransaction.commit()
+		completion()
     }
     
     public func animateOut(duration: TimeInterval = 0.5,
@@ -117,6 +118,7 @@ public class MarkView: UIView, Copying {
         animation.toValue = 0.0
         shapeLayer.add(animation, forKey: nil)
         CATransaction.commit()
+		completion()
     }
     
     // MARK: - UI
