@@ -12,7 +12,7 @@ import Foundation
 final class FiveTurnsState: PlayerInputState {
 	
 	/// Инвокер команд для исполнения
-	var invoker: GameInvoker
+	weak var invoker: GameInvoker?
 	
 	init(player: Player,
 				  invoker: GameInvoker,
@@ -30,7 +30,7 @@ final class FiveTurnsState: PlayerInputState {
 	}
 	
 	override func addMark(at position: GameboardPosition) {
-		invoker.addCommand(for: player, at: position)
+		invoker?.addCommand(for: player, at: position)
 		self.isCompleted = true
 	}
 }

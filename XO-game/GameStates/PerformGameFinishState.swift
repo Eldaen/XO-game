@@ -12,7 +12,7 @@ final class PerformGameFinishState: GameState {
 
 	
 	/// Инвокер команд для исполнения
-	var invoker: GameInvoker
+	weak var invoker: GameInvoker?
 	
 	var isCompleted: Bool = false
 	
@@ -31,7 +31,7 @@ final class PerformGameFinishState: GameState {
 	}
 	
 	func begin() {
-		invoker.execute()
+		invoker?.execute()
 	}
 	
 	func addMark(at position: GameboardPosition) { }
